@@ -32,8 +32,7 @@ public class MemberService {
 	}
 
 	private void validateMember(String email){
-		boolean b = memberRepository.existsByEmail(email);
-		if (b== true)
+		if(memberRepository.existsByEmail(email))
 			throw new IllegalStateException(MEMBER_DUPLICATED);
 	}
 }

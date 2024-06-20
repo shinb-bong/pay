@@ -9,7 +9,6 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import summer.pay.config.util.GenerateNumber;
 import summer.pay.domain.Company;
 import summer.pay.domain.type.AccountType;
 import summer.pay.domain.type.BankType;
