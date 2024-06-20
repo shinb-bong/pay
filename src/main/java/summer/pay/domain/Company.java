@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import summer.pay.domain.type.Grade;
 
 @Entity
 @Getter
@@ -24,5 +25,13 @@ public class Company {
 	private String password;
 	private String name; // 기업명
 	private String email;
+
+	public static Company createCompany(String password, String name,String email){
+		return Company.builder()
+			.email(email)
+			.name(name)
+			.password(password)
+			.build();
+	}
 
 }

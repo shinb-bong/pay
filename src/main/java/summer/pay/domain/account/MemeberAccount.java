@@ -23,4 +23,8 @@ public class MemeberAccount extends Account{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id")
 	private Member member;
+
+	// public MemeberAccount(int deposit, String number, BankType bankType) {
+	// 	super(deposit, number, bankType);
+	// }
 }

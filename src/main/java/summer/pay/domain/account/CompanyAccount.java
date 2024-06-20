@@ -23,4 +23,13 @@ public class CompanyAccount extends Account{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "company_id")
 	private Company company;
+
+	// public CompanyAccount(int deposit, String number, BankType bankType) {
+	// 	super(deposit, number, bankType);
+	// }
+
+	// public static Account createCompanyAccount(Company company){
+		// super(0,)
+
+	// }
 }

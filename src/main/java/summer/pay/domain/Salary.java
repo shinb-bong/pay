@@ -39,4 +39,13 @@ public class Salary {
 
 /*	private boolean isPayments; // 지급 여부*/
 
+	public static Salary createSalary(int amount, LocalDateTime date, Member member, Company company){
+		return Salary.builder()
+			.amount(amount)
+			.date(date)
+			.member(member)
+			.company(company)
+			.build();
+	}
+
 }

@@ -29,5 +29,12 @@ public class Member {
 	private String email;
 	@Enumerated(EnumType.STRING)
 	private Grade grade;
-
+	public static Member createMember(String password, String name,String email){
+		return Member.builder()
+			.email(email)
+			.name(name)
+			.password(password)
+			.grade(Grade.THANKS)
+			.build();
+	}
 }

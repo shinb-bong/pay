@@ -24,4 +24,9 @@ public abstract class Account {
 	@Enumerated(EnumType.STRING)
 	private BankType bankType;
 
+	// public Account(int deposit, String number, BankType bankType) {
+	// 	this.deposit = deposit;
+	// 	this.number = number;
+	// 	this.bankType = bankType;
+	// }
 }
