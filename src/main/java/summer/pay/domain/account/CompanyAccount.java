@@ -6,30 +6,36 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import summer.pay.config.util.GenerateNumber;
 import summer.pay.domain.Company;
 import summer.pay.domain.type.AccountType;
+import summer.pay.domain.type.BankType;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-@Builder
 @DiscriminatorValue(AccountType.COMPANY)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CompanyAccount extends Account{
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "company_id")
 	private Company company;
 
-	// public CompanyAccount(int deposit, String number, BankType bankType) {
-	// 	super(deposit, number, bankType);
-	// }
+	@Builder
+	public CompanyAccount(int deposit, String number, BankType bankType,Company company) {
+		super(deposit, number, bankType);
+		this.company = company;
+	}
 
-	// public static Account createCompanyAccount(Company company){
-		// super(0,)
-
-	// }
+	public static CompanyAccount createCompanyAccount(Company company, BankType bankType){
+		return CompanyAccount.builder()
+			.bankType(bankType)
+			.number(GenerateNumber.generateNumber(bankType))
+			.deposit(0)
+			.company(company)
+			.build();
+	}
 }

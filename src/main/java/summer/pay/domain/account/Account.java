@@ -10,10 +10,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import summer.pay.domain.type.BankType;
 
 @Entity
+@Getter
 @Inheritance(strategy = InheritanceType.JOINED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DiscriminatorColumn(discriminatorType = DiscriminatorType.STRING)
 public abstract class Account {
 
@@ -24,9 +29,9 @@ public abstract class Account {
 	@Enumerated(EnumType.STRING)
 	private BankType bankType;
 
-	// public Account(int deposit, String number, BankType bankType) {
-	// 	this.deposit = deposit;
-	// 	this.number = number;
-	// 	this.bankType = bankType;
-	// }
+	public Account(int deposit, String number, BankType bankType) {
+		this.deposit = deposit;
+		this.number = number;
+		this.bankType = bankType;
+	}
 }
