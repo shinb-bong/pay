@@ -30,10 +30,10 @@ public class CompanyAccount extends Account{
 		this.company = company;
 	}
 
-	public static CompanyAccount createCompanyAccount(Company company, BankType bankType){
+	public static CompanyAccount createCompanyAccount(String number, Company company, BankType bankType){
 		return CompanyAccount.builder()
 			.bankType(bankType)
-			.number(GenerateNumber.generateNumber(bankType))
+			.number(number)
 			.deposit(0)
 			.company(company)
 			.build();

@@ -74,6 +74,7 @@ dependencies {
 
     testCompileOnly 'org.projectlombok:lombok:1.18.20' // 테스트 의존성 추가
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.20' // 테스트 의존성 추가
+    implementation 'org.springframework.retry:spring-retry'
 }
 
 tasks.named('test') {

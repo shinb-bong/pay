@@ -28,10 +28,10 @@ public class MemeberAccount extends Account{
 		super(deposit, number, bankType);
 		this.member = member;
 	}
-	public static MemeberAccount createMemberAccount(Member member, BankType bankType){
+	public static MemeberAccount createMemberAccount(Member member,String number, BankType bankType){
 		return MemeberAccount.builder()
 			.bankType(bankType)
-			.number(GenerateNumber.generateNumber(bankType))
+			.number(number)
 			.deposit(0)
 			.member(member)
 			.build();
