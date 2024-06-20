@@ -7,14 +7,11 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import summer.pay.config.util.GenerateNumber;
-import summer.pay.domain.Company;
 import summer.pay.domain.Member;
 import summer.pay.domain.account.Account;
 import summer.pay.domain.account.MemeberAccount;
-import summer.pay.domain.type.AccountType;
 import summer.pay.domain.type.BankType;
 import summer.pay.repository.AccountRepository;
-import summer.pay.repository.MemberRepository;
 import summer.pay.service.member.MemberService;
 
 @Slf4j
@@ -43,7 +40,7 @@ public class AccountService {
 	private String generateNumber(BankType bankType) {
 		String number = GenerateNumber.generateNumber(bankType);
 		boolean exists = accountRepository.existsByNumber(number);
-		if (exists == true)
+		if (exists)
 			throw new IllegalStateException("계좌 생성 갯수 부족");
 		return number;
 	}
