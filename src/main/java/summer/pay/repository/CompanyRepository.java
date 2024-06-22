@@ -3,9 +3,10 @@ package summer.pay.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import summer.pay.domain.Member;
+import summer.pay.domain.Company;
 
 @Repository
-public interface MemberRepository extends JpaRepository<Member, Long> {
+public interface CompanyRepository extends JpaRepository<Company,Long> {
 	boolean existsByEmail(String email);
+	boolean existsByName(String name);
 }

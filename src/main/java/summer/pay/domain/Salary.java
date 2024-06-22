@@ -37,7 +37,7 @@ public class Salary {
 	@JoinColumn(name = "company_id")
 	private Company company;
 
-/*	private boolean isPayments; // 지급 여부*/
+	private boolean isPayments; // 지급 여부(배치)
 
 	public static Salary createSalary(int amount, LocalDateTime date, Member member, Company company){
 		return Salary.builder()
@@ -45,6 +45,7 @@ public class Salary {
 			.date(date)
 			.member(member)
 			.company(company)
+			.isPayments(false)
 			.build();
 	}
 
