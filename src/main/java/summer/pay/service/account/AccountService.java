@@ -23,10 +23,9 @@ public class AccountService {
 
 	private final MemberService memberService;
 	private final AccountRepository accountRepository;
-	// private final CompanyService companyService;
 
 	@Transactional
-	public String memberOpen(Long memberId, BankType bankType){
+	public String memberOpen(Long memberId, BankType bankType) {
 		Member member = memberService.findMember(memberId);
 		String number = generateNumber(bankType);
 		MemeberAccount memberAccount = MemeberAccount.createMemberAccount(member, number, bankType);
@@ -52,7 +51,7 @@ public class AccountService {
 	}
 
 	@Retryable(maxAttempts = 10)
-	private String generateNumber(BankType bankType) {
+	public String generateNumber(BankType bankType) {
 		String number = GenerateNumber.generateNumber(bankType);
 		boolean exists = accountRepository.existsByNumber(number);
 		if (exists)

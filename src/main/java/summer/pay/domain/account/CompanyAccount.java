@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +20,7 @@ import summer.pay.domain.type.BankType;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CompanyAccount extends Account{
 
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "company_id")
 	private Company company;
 
@@ -30,11 +31,17 @@ public class CompanyAccount extends Account{
 	}
 
 	public static CompanyAccount createCompanyAccount(String number, Company company, BankType bankType){
-		return CompanyAccount.builder()
+		CompanyAccount ca = CompanyAccount.builder()
 			.bankType(bankType)
 			.number(number)
 			.deposit(0)
-			.company(company)
 			.build();
+		ca.addCompany(company);
+		return ca;
+	}
+
+	public void addCompany(Company company){
+		this.company = company;
+		company.addCa(this);
 	}
 }
