@@ -75,6 +75,7 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-batch'
     implementation'org.springframework.boot:spring-boot-starter-quartz'
+    implementation 'org.springframework.batch:spring-batch-test'
 
     testCompileOnly 'org.projectlombok:lombok:1.18.20' // 테스트 의존성 추가
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.20' // 테스트 의존성 추가

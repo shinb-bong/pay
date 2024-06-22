@@ -6,15 +6,12 @@ import java.util.Collections;
 
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
-import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
-import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
 import org.springframework.batch.core.job.builder.JobBuilder;
 import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.step.builder.StepBuilder;
 import org.springframework.batch.item.ItemProcessor;
 import org.springframework.batch.item.ItemReader;
 import org.springframework.batch.item.ItemWriter;
-import org.springframework.batch.item.data.RepositoryItemReader;
 import org.springframework.batch.item.data.builder.RepositoryItemReaderBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -93,7 +90,8 @@ public class PaidConfig {
 				if (salary != null){
 					salaryRepository.delete(salary);
 				}
-				paidSalaryRepository.save(item);
+				PaidSalary saved = paidSalaryRepository.save(item);
+				log.info("배치 성공  = {}",saved.getId());
 			}
 		);
 	}

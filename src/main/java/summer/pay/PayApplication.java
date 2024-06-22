@@ -1,11 +1,10 @@
 package summer.pay;
 
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@EnableBatchProcessing
+// @EnableBatchProcessing -> Spring Boot 2에서는 발생하지 않았던 Spring Batch의 자동 구성을 비활성화
 public class PayApplication {
 
 	public static void main(String[] args) {
