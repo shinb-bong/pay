@@ -29,9 +29,20 @@ public abstract class Account {
 	@Enumerated(EnumType.STRING)
 	private BankType bankType;
 
-	public Account(int deposit, String number, BankType bankType) {
+	protected Account(int deposit, String number, BankType bankType) {
 		this.deposit = deposit;
 		this.number = number;
 		this.bankType = bankType;
+	}
+
+	public void plus(int money){
+		this.deposit += money;
+	}
+
+	public void minus(int money){
+		if (this.deposit >= money)
+			this.deposit -= money;
+		else
+			throw new IllegalStateException("계좌 금액이 부족합니다.");
 	}
 }
