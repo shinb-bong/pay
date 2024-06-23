@@ -38,7 +38,6 @@ public abstract class Account {
 	public void plus(int money){
 		this.deposit += money;
 	}
-
 	public void minus(int money){
 		if (this.deposit >= money)
 			this.deposit -= money;

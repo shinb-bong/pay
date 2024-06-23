@@ -60,6 +60,7 @@ public class PaidConfig {
 		LocalDateTime toDate = now.plusHours(1);
 		LocalDateTime fromDate = now.minusDays(31);
 
+		// 내역을 지우지말고 수정방식으로 갈지, 계속 입력할지는 고민중
 		log.info("toDate = {}, fromDate = {} ", toDate,fromDate);
 
 		return new RepositoryItemReaderBuilder<Salary>()
@@ -90,6 +91,8 @@ public class PaidConfig {
 				if (salary != null){
 					salaryRepository.delete(salary);
 				}
+				item.getMemberAccount().plus(salary.getAmount());
+				item.getCompanyAccount().minus(salary.getAmount());
 				PaidSalary saved = paidSalaryRepository.save(item);
 				log.info("배치 성공  = {}",saved.getId());
 			}
