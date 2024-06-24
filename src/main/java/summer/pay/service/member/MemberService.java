@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import summer.pay.config.MemberConst;
 import summer.pay.controller.dto.MemberDto;
 import summer.pay.domain.Member;
 import summer.pay.repository.MemberRepository;
@@ -16,8 +17,6 @@ import summer.pay.repository.MemberRepository;
 public class MemberService {
 
 	private final MemberRepository memberRepository;
-	private final String MEMBER_NOT_FOUND = "회원을 찾지 못했습니다.";
-	private final String MEMBER_DUPLICATED = "회원이 존재합니다.";
 
 	@Transactional
 	public Long join(MemberDto memberDto){
@@ -26,13 +25,13 @@ public class MemberService {
 		return memberRepository.save(member).getId();
 	}
 
-	public Member findMember(Long memberId){
+	public Member findMemberId(Long memberId){
 		return memberRepository.findById(memberId)
-			.orElseThrow(() -> new IllegalStateException(MEMBER_NOT_FOUND));
+			.orElseThrow(() -> new IllegalStateException(MemberConst.MEMBER_NOT_FOUND));
 	}
 
 	private void validateMember(String email){
 		if(memberRepository.existsByEmail(email))
-			throw new IllegalStateException(MEMBER_DUPLICATED);
+			throw new IllegalStateException(MemberConst.MEMBER_DUPLICATED);
 	}
 }

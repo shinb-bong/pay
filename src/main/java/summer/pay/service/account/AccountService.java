@@ -26,7 +26,7 @@ public class AccountService {
 
 	@Transactional
 	public String memberOpen(Long memberId, BankType bankType) {
-		Member member = memberService.findMember(memberId);
+		Member member = memberService.findMemberId(memberId);
 		String number = generateNumber(bankType);
 		MemeberAccount memberAccount = MemeberAccount.createMemberAccount(member, number, bankType);
 		return accountRepository.save(memberAccount).getNumber();
