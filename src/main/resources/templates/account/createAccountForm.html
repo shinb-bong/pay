@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Account Opening Form</title>
+</head>
+<body>
+<h1>Open a New Account</h1>
+<form th:action th:object="${accountForm}" method="post">
+    <label for="type">Select Bank Type:</label>
+    <select th:field="*{type}" id="type">
+        <option th:each="type : ${bankTypes}" th:value="${type}" th:text="${type}"></option>
+    </select>
+    <br/>
+    <button type="submit">Open Account</button>
+</form>
+</body>
+</html>

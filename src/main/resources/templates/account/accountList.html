@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Account List</title>
+</head>
+<body>
+<h1>Account List</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Account Number</th>
+        <th>Bank Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="account : ${accounts}">
+        <td th:text="${account.number}">Account Number</td>
+        <td th:text="${account.deposit}">Account Deposit</td>
+        <td th:text="${account.bankType}">Bank Type</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

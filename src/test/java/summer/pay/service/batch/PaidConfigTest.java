@@ -1,39 +1,29 @@
 package summer.pay.service.batch;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.Before;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.JobExecution;
-import org.springframework.batch.core.JobParameter;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
-import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.test.JobLauncherTestUtils;
 import org.springframework.batch.test.context.SpringBatchTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.transaction.annotation.Transactional;
 
-import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import summer.pay.config.TestBatchConfig;
 import summer.pay.domain.PaidSalary;
 import summer.pay.domain.Salary;
-import summer.pay.domain.account.Account;
 import summer.pay.domain.account.CompanyAccount;
-import summer.pay.domain.account.MemeberAccount;
+import summer.pay.domain.account.MemberAccount;
 import summer.pay.domain.type.BankType;
 import summer.pay.repository.AccountRepository;
 import summer.pay.repository.PaidSalaryRepository;
@@ -76,8 +66,8 @@ class PaidConfigTest {
 	@Rollback
 	public void paidJob_test() throws Exception {
 	    //given
-		MemeberAccount account = MemeberAccount.createMemberAccount(null,MEMBER_NUMBER , BankType.KB);
-		MemeberAccount savedMA = accountRepository.save(account);
+		MemberAccount account = MemberAccount.createMemberAccount(null,MEMBER_NUMBER , BankType.KB);
+		MemberAccount savedMA = accountRepository.save(account);
 
 		CompanyAccount account2 = CompanyAccount.builder()
 			.bankType(BankType.IBK)

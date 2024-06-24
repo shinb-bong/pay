@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import summer.pay.controller.dto.MemberDto;
 import summer.pay.domain.account.Account;
-import summer.pay.domain.account.MemeberAccount;
+import summer.pay.domain.account.MemberAccount;
 import summer.pay.domain.type.BankType;
 import summer.pay.service.MemberTestEx;
 import summer.pay.service.member.MemberService;
@@ -34,7 +34,7 @@ class AccountServiceTest {
 		BankType kb = BankType.KB;
 		//when
 		String number = accountService.memberOpen(memberId, kb);
-		MemeberAccount account = (MemeberAccount) accountService.findByNumber(number);
+		MemberAccount account = (MemberAccount) accountService.findByNumber(number);
 		//then
 		assertThat(account.getMember().getId()).isEqualTo(memberId);
 		assertThat(account.getBankType()).isEqualTo(BankType.KB);

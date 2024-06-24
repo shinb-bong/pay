@@ -1,6 +1,8 @@
 package summer.pay.service.account;
 
 
+import java.util.List;
+
 import org.springframework.retry.annotation.Retryable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import summer.pay.config.util.GenerateNumber;
 import summer.pay.domain.Member;
 import summer.pay.domain.account.Account;
-import summer.pay.domain.account.MemeberAccount;
+import summer.pay.domain.account.MemberAccount;
 import summer.pay.domain.type.BankType;
 import summer.pay.repository.AccountRepository;
 import summer.pay.service.member.MemberService;
@@ -28,7 +30,7 @@ public class AccountService {
 	public String memberOpen(Long memberId, BankType bankType) {
 		Member member = memberService.findMemberId(memberId);
 		String number = generateNumber(bankType);
-		MemeberAccount memberAccount = MemeberAccount.createMemberAccount(member, number, bankType);
+		MemberAccount memberAccount = MemberAccount.createMemberAccount(member, number, bankType);
 		return accountRepository.save(memberAccount).getNumber();
 	}
 
@@ -48,6 +50,10 @@ public class AccountService {
 
 	public Account findByNumber(String number) {
 		return accountRepository.findByNumber(number).orElseThrow(() -> new IllegalStateException("해당 계좌는 없는 계좌입니다."));
+	}
+
+	public List<MemberAccount> findMemberAccounts(Long memberId){
+		return accountRepository.findByMemberId(memberId);
 	}
 
 	@Retryable(maxAttempts = 10)

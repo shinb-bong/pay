@@ -12,8 +12,7 @@ import summer.pay.domain.Member;
 public class HomeController {
 
 	@GetMapping("/")
-	public String home(@SessionAttribute(name = LOGIN_MEMBER, required = false)
-	Member loginMember, Model model){
+	public String home(@SessionAttribute(name = LOGIN_MEMBER, required = false) Member loginMember, Model model){
 
 		if (loginMember == null) {
 			return "home";

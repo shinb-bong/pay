@@ -14,7 +14,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import summer.pay.domain.account.CompanyAccount;
-import summer.pay.domain.account.MemeberAccount;
+import summer.pay.domain.account.MemberAccount;
 
 /*	탐색 방식으로 인한 정산 완료 테이블 따로 제작*/
 @Entity
@@ -31,7 +31,7 @@ public class PaidSalary {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_account_id")
-	private MemeberAccount memberAccount;
+	private MemberAccount memberAccount;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "company_id")
@@ -40,7 +40,7 @@ public class PaidSalary {
 	private LocalDateTime payDate; // 월급시기
 	private LocalDateTime completedDate; // 월급 지급 완료시기
 
-	public PaidSalary(Long id,int amount, MemeberAccount memberAccount, CompanyAccount companyAccount, LocalDateTime payDate) {
+	public PaidSalary(Long id,int amount, MemberAccount memberAccount, CompanyAccount companyAccount, LocalDateTime payDate) {
 		this.id = id;
 		this.amount = amount;
 		this.memberAccount = memberAccount;

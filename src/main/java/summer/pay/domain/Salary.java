@@ -16,7 +16,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import summer.pay.domain.account.CompanyAccount;
-import summer.pay.domain.account.MemeberAccount;
+import summer.pay.domain.account.MemberAccount;
 
 @Entity
 @Getter
@@ -33,13 +33,13 @@ public class Salary {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_account_id")
-	private MemeberAccount memberAccount;
+	private MemberAccount memberAccount;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "company_id")
 	private CompanyAccount companyAccount;
 
-	public static Salary createSalary(int amount, LocalDateTime date, MemeberAccount ma, CompanyAccount ca){
+	public static Salary createSalary(int amount, LocalDateTime date, MemberAccount ma, CompanyAccount ca){
 		return Salary.builder()
 			.amount(amount)
 			.payDate(date)

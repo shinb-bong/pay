@@ -17,18 +17,18 @@ import summer.pay.domain.type.BankType;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DiscriminatorValue(AccountType.MEMBER)
-public class MemeberAccount extends Account{
+public class MemberAccount extends Account{
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "member_id")
 	private Member member;
 
 	@Builder
-	public MemeberAccount(int deposit, String number, BankType bankType, Member member) {
+	public MemberAccount(int deposit, String number, BankType bankType, Member member) {
 		super(deposit, number, bankType);
 		this.member = member;
 	}
-	public static MemeberAccount createMemberAccount(Member member,String number, BankType bankType){
-		return MemeberAccount.builder()
+	public static MemberAccount createMemberAccount(Member member,String number, BankType bankType){
+		return MemberAccount.builder()
 			.bankType(bankType)
 			.number(number)
 			.deposit(0)
