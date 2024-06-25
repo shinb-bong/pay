@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AsyncSchedulerTask {
 
 	@Async
-	@Scheduled(cron = "${schedules.cron.test}")
+	@Scheduled(cron = "0/1 * * * * ?")
 	public void schedulerTest1() throws InterruptedException {
 		log.info("SchedulerTask.schedulerTest1");
 		Thread.sleep(2000);
@@ -27,7 +27,7 @@ public class AsyncSchedulerTask {
 	}
 
 	@Async
-	@Scheduled(cron = "${schedules.cron.test}")
+	@Scheduled(cron = "0/1 * * * * ?")
 	public void schedulerTest2() {
 		log.info("SchedulerTask.schedulerTest2");
 		log.info("scheduler2 = {}", LocalDateTime.now());

@@ -22,15 +22,18 @@ public class MemberAccount extends Account{
 	@JoinColumn(name = "member_id")
 	private Member member;
 
+	private String memo;
 	@Builder
-	public MemberAccount(int deposit, String number, BankType bankType, Member member) {
+	public MemberAccount(int deposit, String number, BankType bankType, Member member, String memo) {
 		super(deposit, number, bankType);
 		this.member = member;
+		this.memo = memo;
 	}
-	public static MemberAccount createMemberAccount(Member member,String number, BankType bankType){
+	public static MemberAccount createMemberAccount(Member member,String number, BankType bankType, String memo){
 		return MemberAccount.builder()
 			.bankType(bankType)
 			.number(number)
+			.memo(memo)
 			.deposit(0)
 			.member(member)
 			.build();

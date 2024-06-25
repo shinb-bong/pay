@@ -1,4 +1,4 @@
-package summer.pay.config.util;
+package summer.pay.common.config.util;
 
 import java.util.random.RandomGenerator;
 

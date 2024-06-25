@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import summer.pay.config.util.GenerateNumber;
+import summer.pay.common.config.util.GenerateNumber;
 import summer.pay.domain.Member;
 import summer.pay.domain.account.Account;
 import summer.pay.domain.account.MemberAccount;
@@ -27,10 +27,10 @@ public class AccountService {
 	private final AccountRepository accountRepository;
 
 	@Transactional
-	public String memberOpen(Long memberId, BankType bankType) {
+	public String memberOpen(Long memberId, BankType bankType, String memo) {
 		Member member = memberService.findMemberId(memberId);
 		String number = generateNumber(bankType);
-		MemberAccount memberAccount = MemberAccount.createMemberAccount(member, number, bankType);
+		MemberAccount memberAccount = MemberAccount.createMemberAccount(member, number, bankType, memo);
 		return accountRepository.save(memberAccount).getNumber();
 	}
 

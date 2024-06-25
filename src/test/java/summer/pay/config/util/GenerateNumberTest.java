@@ -5,6 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import lombok.extern.slf4j.Slf4j;
+import summer.pay.common.config.util.GenerateNumber;
 import summer.pay.domain.type.BankType;
 
 @Slf4j

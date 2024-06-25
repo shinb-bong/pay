@@ -6,4 +6,5 @@ import summer.pay.domain.type.BankType;
 @Data
 public class AccountForm {
 	private BankType type;
+	private String memo;
 }

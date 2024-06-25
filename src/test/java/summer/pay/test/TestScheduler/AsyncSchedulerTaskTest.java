@@ -9,9 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(properties = {
-	"schedules.cron.test=0/1 * * * * ?"
-})
+@SpringBootTest
 public class AsyncSchedulerTaskTest {
 
 	@Autowired

@@ -6,10 +6,14 @@
 <body>
 <h1>Open a New Account</h1>
 <form th:action th:object="${accountForm}" method="post">
+
     <label for="type">Select Bank Type:</label>
     <select th:field="*{type}" id="type">
         <option th:each="type : ${bankTypes}" th:value="${type}" th:text="${type}"></option>
     </select>
+    <br/>
+    <label for="memo">Memo:</label>
+    <input type="text" th:field="*{memo}" id="memo"/>
     <br/>
     <button type="submit">Open Account</button>
 </form>

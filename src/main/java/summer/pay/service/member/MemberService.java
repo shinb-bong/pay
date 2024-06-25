@@ -5,7 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import summer.pay.config.MemberConst;
+import summer.pay.common.config.MemberConst;
 import summer.pay.controller.dto.MemberDto;
 import summer.pay.domain.Member;
 import summer.pay.repository.MemberRepository;

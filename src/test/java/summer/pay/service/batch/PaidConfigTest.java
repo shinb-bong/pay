@@ -66,7 +66,7 @@ class PaidConfigTest {
 	@Rollback
 	public void paidJob_test() throws Exception {
 	    //given
-		MemberAccount account = MemberAccount.createMemberAccount(null,MEMBER_NUMBER , BankType.KB);
+		MemberAccount account = MemberAccount.createMemberAccount(null,MEMBER_NUMBER , BankType.KB, "나라사랑카드");
 		MemberAccount savedMA = accountRepository.save(account);
 
 		CompanyAccount account2 = CompanyAccount.builder()

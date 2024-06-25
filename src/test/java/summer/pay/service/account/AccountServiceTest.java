@@ -33,7 +33,7 @@ class AccountServiceTest {
 		Long memberId = memberService.join(dto);
 		BankType kb = BankType.KB;
 		//when
-		String number = accountService.memberOpen(memberId, kb);
+		String number = accountService.memberOpen(memberId, kb,"나사,");
 		MemberAccount account = (MemberAccount) accountService.findByNumber(number);
 		//then
 		assertThat(account.getMember().getId()).isEqualTo(memberId);
@@ -48,11 +48,11 @@ class AccountServiceTest {
 		MemberDto dto = MemberTestEx.createMemberDto("wj", "wj@wj.com", "1234");
 		Long memberId = memberService.join(dto);
 		BankType kb = BankType.KB;
-		String senderNumber= accountService.memberOpen(memberId, kb);
+		String senderNumber= accountService.memberOpen(memberId, kb ,"나사카");
 		MemberDto dto2 = MemberTestEx.createMemberDto("bk", "bk@bk.com", "12345");
 		Long memberId2 = memberService.join(dto2);
 		BankType ibk = BankType.IBK;
-		String receiverNumber = accountService.memberOpen(memberId2, ibk);
+		String receiverNumber = accountService.memberOpen(memberId2, ibk,"나사카2");
 
 		Account sendAccount = accountService.findByNumber(senderNumber);
 		int initMoney = 100000;
@@ -64,5 +64,6 @@ class AccountServiceTest {
 		Assertions.assertThat(accountService.findByNumber(receiverNumber).getDeposit()).isEqualTo(money);
 		Assertions.assertThat(sendAccount.getDeposit()).isEqualTo(initMoney-money);
 	}
+
 
 }

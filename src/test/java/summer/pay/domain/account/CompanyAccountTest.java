@@ -5,7 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import lombok.extern.slf4j.Slf4j;
-import summer.pay.config.util.GenerateNumber;
+import summer.pay.common.config.util.GenerateNumber;
 import summer.pay.domain.Company;
 import summer.pay.domain.type.BankType;
 
@@ -21,7 +21,7 @@ class CompanyAccountTest {
 		//when
 		CompanyAccount ca = CompanyAccount.createCompanyAccount(number,company, kb);
 		//then
-		assertThat(ca.getDeposit()).isEqualTo(0);
+		assertThat(ca.getDeposit()).isZero();
 		assertThat(ca.getBankType()).isEqualTo(kb);
 		assertThat(ca.getCompany().getName()).isEqualTo("wj");
 	}

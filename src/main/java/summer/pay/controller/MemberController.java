@@ -33,7 +33,8 @@ public class MemberController {
 			return "members/addMemberForm";
 		}
 		Long memberId = memberService.join(memberDto);
-		redirectAttributes.addAttribute("memberId", memberId);
-		return "redirect:/members/{memberId}";
+		// redirectAttributes.addAttribute("memberId", memberId);
+		// return "redirect:/members/{memberId}";
+		return "redirect:/";
 	}
 }

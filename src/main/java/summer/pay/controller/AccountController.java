@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import summer.pay.annotation.Login;
+import summer.pay.common.annotation.Login;
 import summer.pay.controller.form.AccountForm;
 import summer.pay.domain.Member;
 import summer.pay.domain.account.MemberAccount;
@@ -35,7 +35,7 @@ public class AccountController {
 	@PostMapping("/add")
 	public String submitAccountForm(@ModelAttribute("accountForm") AccountForm accountForm, @Login Member member) {
 		// 계좌 생성 로직을 여기에 추가하세요
-		String number = accountService.memberOpen(member.getId(), accountForm.getType());
+		String number = accountService.memberOpen(member.getId(), accountForm.getType(), accountForm.getMemo());
 		log.info("Selected Bank Type: " + accountForm.getType());
 		log.info("CREATED NUMBER = {}", number);
 		return "redirect:/";

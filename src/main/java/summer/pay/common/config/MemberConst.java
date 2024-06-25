@@ -1,4 +1,4 @@
-package summer.pay.config;
+package summer.pay.common.config;
 
 import lombok.experimental.UtilityClass;
 

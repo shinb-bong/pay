@@ -2,23 +2,69 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Account List</title>
+    <script>
+        let nowId = null;
+        function showTransferForm(accountId) {
+            if (nowId != null){
+                document.getElementById('transferForm-' + nowId).style.display = 'none';
+            }
+            document.getElementById('transferForm-' + accountId).style.display = 'block';
+            nowId = accountId;
+        }
+        function combineAccountNumber(parts, targetId) {
+            var fullAccountNumber = parts.map(function(partId) {
+                return document.getElementById(partId).value;
+            }).join('');
+            document.getElementById(targetId).value = fullAccountNumber;
+        }
+    </script>
 </head>
 <body>
 <h1>Account List</h1>
 <table border="1">
     <thead>
     <tr>
+        <th>Account Name</th>
         <th>Account Number</th>
+        <th>Account Deposit</th>
         <th>Bank Type</th>
+        <th>Send</th>
+        <th>PUT MONEY</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="account : ${accounts}">
+        <input type="hidden" name="accountId" th:value="${account.id}" />
+        <td th:text="${account.memo}">Account Name</td>
         <td th:text="${account.number}">Account Number</td>
         <td th:text="${account.deposit}">Account Deposit</td>
         <td th:text="${account.bankType}">Bank Type</td>
+        <td>
+            <button type="button" th:onclick="'showTransferForm(' + ${account.id} + ')'">Transfer</button>
+        </td>
+        <td>
+            <button type="button" th:onclick="|location.href='@{/post/{id}(id = ${account.id})}'|">입금</button>
+        </td>
     </tr>
     </tbody>
 </table>
+<!-- 송금 폼 -->
+<div th:each="account : ${accounts}" th:id="'transferForm-' + ${account.id}" style="display: none;">
+    <h3>Transfer to Account: <span th:text="${account.number}"></span></h3>
+    <form th:action="@{/transfer}" method="post">
+        <input type="hidden" name="accountId" th:value="${account.id}" />
+        <input type="hidden" id="hiddenMyAccountNumber" name="myAccountNumber" th:value="${account.number}"/>
+        <label for="recipientAccountNumberPart1">Recipient Account Number:</label>
+        <input type="text" id="recipientAccountNumberPart1" maxlength="4" size="4" pattern="\d{4}" required /> -
+        <input type="text" id="recipientAccountNumberPart2" maxlength="4" size="4" pattern="\d{4}" required /> -
+        <input type="text" id="recipientAccountNumberPart3" maxlength="4" size="4" pattern="\d{4}" required /> -
+        <input type="text" id="recipientAccountNumberPart4" maxlength="4" size="4" pattern="\d{4}" required />
+        <input type="hidden" id="hiddenRecipientAccountNumber" name="recipientAccountNumber" />
+        <br/>
+        <label for="amount">Amount:</label>
+        <input type="number" name="amount" id="amount" required />
+        <button type="submit" onclick="combineAccountNumber(['recipientAccountNumberPart1', 'recipientAccountNumberPart2', 'recipientAccountNumberPart3', 'recipientAccountNumberPart4'], 'hiddenRecipientAccountNumber')">Submit</button>
+    </form>
+</div>
 </body>
 </html>

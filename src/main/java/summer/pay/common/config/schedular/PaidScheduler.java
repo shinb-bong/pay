@@ -1,4 +1,4 @@
-package summer.pay.config.schedular;
+package summer.pay.common.config.schedular;
 
 import java.util.Date;
 

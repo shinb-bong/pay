@@ -1,4 +1,4 @@
-package summer.pay.annotation;
+package summer.pay.common.annotation;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.support.WebDataBinderFactory;
@@ -11,8 +11,11 @@ import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import summer.pay.controller.LoginController;
 import summer.pay.domain.Member;
-import summer.pay.service.member.LoginService;
 
+/**
+ * ArgumentResolver: 요청과 관련된 복잡한 로직을 처리할 수 있으며,
+ * 주로 HTTP 요청과 관련된 데이터를 처리
+ */
 @Slf4j
 public class LoginMemberArgumentResolver implements HandlerMethodArgumentResolver {
 	@Override
