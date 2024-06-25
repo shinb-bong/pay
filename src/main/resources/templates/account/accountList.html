@@ -44,7 +44,7 @@
             <button type="button" th:attr="onclick='showTransferForm(\'' + ${account.id} + '\')'">Transfer</button>
         </td>
         <td>
-            <button type="button" th:attr="onclick='location.href=\'@{/post/{id}(id=${account.id})}\''">입금</button>
+            <button type="button" th:attr="onclick='location.href=\'/accounts/post/self/' + ${account.id} + '\''">입금</button>
         </td>
     </tr>
     </tbody>

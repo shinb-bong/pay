@@ -33,8 +33,7 @@ class AccountServiceTest {
 		Long memberId = memberService.join(dto);
 		BankType kb = BankType.KB;
 		//when
-		String number = accountService.memberOpen(memberId, kb,"나사,");
-		MemberAccount account = (MemberAccount) accountService.findByNumber(number);
+		MemberAccount account = accountService.memberOpen(memberId, kb, "나사,");
 		//then
 		assertThat(account.getMember().getId()).isEqualTo(memberId);
 		assertThat(account.getBankType()).isEqualTo(BankType.KB);
@@ -48,21 +47,20 @@ class AccountServiceTest {
 		MemberDto dto = MemberTestEx.createMemberDto("wj", "wj@wj.com", "1234");
 		Long memberId = memberService.join(dto);
 		BankType kb = BankType.KB;
-		String senderNumber= accountService.memberOpen(memberId, kb ,"나사카");
+		MemberAccount senderAccount = accountService.memberOpen(memberId, kb, "나사카");
 		MemberDto dto2 = MemberTestEx.createMemberDto("bk", "bk@bk.com", "12345");
 		Long memberId2 = memberService.join(dto2);
 		BankType ibk = BankType.IBK;
-		String receiverNumber = accountService.memberOpen(memberId2, ibk,"나사카2");
+		MemberAccount receiverAccount = accountService.memberOpen(memberId2, ibk, "나사카2");
 
-		Account sendAccount = accountService.findByNumber(senderNumber);
 		int initMoney = 100000;
-		sendAccount.plus(initMoney);
+		accountService.selfDeposit(senderAccount.getId(),initMoney);
 		//when
-		int send = accountService.send(senderNumber, receiverNumber, money);
+		int send = accountService.send(senderAccount.getId(),receiverAccount.getNumber(),ibk, money);
 		//then
 		Assertions.assertThat(send).isEqualTo(money);
-		Assertions.assertThat(accountService.findByNumber(receiverNumber).getDeposit()).isEqualTo(money);
-		Assertions.assertThat(sendAccount.getDeposit()).isEqualTo(initMoney-money);
+		Assertions.assertThat(accountService.findNumber(receiverAccount.getNumber(), ibk).getDeposit()).isEqualTo(money);
+		Assertions.assertThat(senderAccount.getDeposit()).isEqualTo(initMoney-money);
 	}
 
 

@@ -27,11 +27,11 @@ public class AccountService {
 	private final AccountRepository accountRepository;
 
 	@Transactional
-	public String memberOpen(Long memberId, BankType bankType, String memo) {
+	public MemberAccount memberOpen(Long memberId, BankType bankType, String memo) {
 		Member member = memberService.findMemberId(memberId);
 		String number = generateNumber(bankType);
 		MemberAccount memberAccount = MemberAccount.createMemberAccount(member, number, bankType, memo);
-		return accountRepository.save(memberAccount).getNumber();
+		return accountRepository.save(memberAccount);
 	}
 
 	public Account find(Long accountId){
@@ -40,16 +40,24 @@ public class AccountService {
 	}
 
 	@Transactional
-	public int send(String sendNumber, String receiverNumber,int money){
-		Account sender = findByNumber(sendNumber);
-		Account receiver = findByNumber(receiverNumber);
+	public int send(Long sendAccountId,
+		String receiverNumber, BankType receiverBankType,
+		int money){
+		Account sender = findSender(sendAccountId);
+		Account receiver = findNumber(receiverNumber,receiverBankType);
 		sender.minus(money);
 		receiver.plus(money);
 		return money;
 	}
 
-	public Account findByNumber(String number) {
-		return accountRepository.findByNumber(number).orElseThrow(() -> new IllegalStateException("해당 계좌는 없는 계좌입니다."));
+	private Account findSender(Long sendAccountId) {
+		return accountRepository.findById(sendAccountId).orElseThrow(
+			()-> new IllegalStateException("입금 계좌가 없습니다.")
+		);
+	}
+
+	public Account findNumber(String number, BankType bankType) {
+		return accountRepository.findByNumberAndBankType(number,bankType).orElseThrow(() -> new IllegalStateException("해당 계좌는 없는 계좌입니다."));
 	}
 
 	public List<MemberAccount> findMemberAccounts(Long memberId){
@@ -63,6 +71,12 @@ public class AccountService {
 		if (exists)
 			throw new IllegalStateException("계좌 생성 갯수 부족");
 		return number;
+	}
+
+	@Transactional
+	public void selfDeposit(Long accountId, int amount){
+		Account sender = findSender(accountId);
+		sender.plus(amount);
 	}
 
 }

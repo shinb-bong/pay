@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>입금 폼</title>
+</head>
+<body>
+<form th:action="@{/accounts/post/self}" method="post" th:object="${selfPostForm}">
+  <input type="hidden" th:field="*{accountId}"/>
+
+  <div>
+    <label>계좌 번호: </label>
+    <span th:text="*{number}"></span>
+  </div>
+
+  <div>
+    <label>은행 타입: </label>
+    <span th:text="*{bankType}"></span>
+  </div>
+
+  <div>
+    <label for="amount">입금 금액:</label>
+    <input type="number" id="amount" th:field="*{amount}" min="0" required/>
+  </div>
+
+  <button type="submit">입금</button>
+</form>
+</body>
+</html>
