@@ -26,10 +26,6 @@ public class EncryptConverter implements ConditionalGenericConverter {
 
 	@Override
 	public Object convert(Object source, TypeDescriptor sourceType, TypeDescriptor targetType) {
-		try {
-			return Encryption.encrypt((Long)source);
-		} catch (Exception e) {
-			throw new IllegalStateException(e.getMessage());
-		}
+		return Encryption.encrypt((Long)source);
 	}
 }

@@ -5,7 +5,8 @@
     <script>
         let nowId = null;
         function showTransferForm(accountId) {
-            if (nowId != null){
+            console.log('showTransferForm called with accountId:', accountId);  // 디버깅 메시지 추가
+            if (nowId != null) {
                 document.getElementById('transferForm-' + nowId).style.display = 'none';
             }
             document.getElementById('transferForm-' + accountId).style.display = 'block';
@@ -40,10 +41,10 @@
         <td th:text="${account.deposit}">Account Deposit</td>
         <td th:text="${account.bankType}">Bank Type</td>
         <td>
-            <button type="button" th:onclick="'showTransferForm(' + ${account.id} + ')'">Transfer</button>
+            <button type="button" th:attr="onclick='showTransferForm(\'' + ${account.id} + '\')'">Transfer</button>
         </td>
         <td>
-            <button type="button" th:onclick="|location.href='@{/post/{id}(id = ${account.id})}'|">입금</button>
+            <button type="button" th:attr="onclick='location.href=\'@{/post/{id}(id=${account.id})}\''">입금</button>
         </td>
     </tr>
     </tbody>

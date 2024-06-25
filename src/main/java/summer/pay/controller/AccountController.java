@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import summer.pay.common.annotation.Login;
+import summer.pay.controller.dto.MemberAccountResponse;
 import summer.pay.controller.form.AccountForm;
 import summer.pay.domain.Member;
 import summer.pay.domain.account.MemberAccount;
@@ -44,7 +45,10 @@ public class AccountController {
 	@GetMapping
 	public String findAccounts(@Login Member member, Model model){
 		List<MemberAccount> memberAccounts = accountService.findMemberAccounts(member.getId());
-		model.addAttribute("accounts", memberAccounts);
+		List<MemberAccountResponse> memberAccountResponseList = memberAccounts.stream()
+			.map(MemberAccountResponse::new)
+			.toList();
+		model.addAttribute("accounts", memberAccountResponseList);
 		return "account/accountList";
 	}
 }

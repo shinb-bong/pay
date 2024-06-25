@@ -31,19 +31,28 @@ public class Encryption {
 		return new SecretKeySpec(bytes, ALGORITHM);
 	}
 
-	public static String encrypt(final Long value) throws Exception {
-		Cipher cipher = Cipher.getInstance(ALGORITHM);
-		cipher.init(Cipher.ENCRYPT_MODE, generateKey());
-		byte[] valueBytes = ByteBuffer.allocate(Long.BYTES).putLong(value).array();
-		byte[] encrypted = cipher.doFinal(valueBytes);
-		return Base64.getEncoder().encodeToString(encrypted);
+	public static String encrypt(final Long value) {
+		try{
+			Cipher cipher = Cipher.getInstance(ALGORITHM);
+			cipher.init(Cipher.ENCRYPT_MODE, generateKey());
+			byte[] valueBytes = ByteBuffer.allocate(Long.BYTES).putLong(value).array();
+			byte[] encrypted = cipher.doFinal(valueBytes);
+			return Base64.getEncoder().encodeToString(encrypted);
+		} catch (Exception e){
+			throw new IllegalStateException("인코딩에 문제가 생겼습니다",e);
+		}
+
 	}
 
-	public static Long decrypt(final String code) throws Exception {
-		Cipher cipher = Cipher.getInstance(ALGORITHM);
-		cipher.init(Cipher.DECRYPT_MODE, generateKey());
-		byte[] encryptedBytes = Base64.getDecoder().decode(code);
-		byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
-		return ByteBuffer.wrap(decryptedBytes).getLong();
+	public static Long decrypt(final String code){
+		try{
+			Cipher cipher = Cipher.getInstance(ALGORITHM);
+			cipher.init(Cipher.DECRYPT_MODE, generateKey());
+			byte[] encryptedBytes = Base64.getDecoder().decode(code);
+			byte[] decryptedBytes = cipher.doFinal(encryptedBytes);
+			return ByteBuffer.wrap(decryptedBytes).getLong();
+		} catch (Exception e){
+			throw new IllegalStateException("디코딩에 문제가 생겼습니다.",e);
+		}
 	}
 }
